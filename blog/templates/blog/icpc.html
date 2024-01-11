@@ -1,0 +1,156 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> International Collegiate Programming Contest </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel = "stylesheet" href = "{% static 'blog/main4.css'%}">
+</head>
+<body>
+  <div class=" custom-container">
+    <div class="con1">
+      <h1> ICPC là gì ? </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-8  icpc-text" style="padding-left: 50px;">
+        <ul>
+        <li style="font-size: 28px;"> ICPC là viết tắt của "International Collegiate Programming Contest". Đây là một cuộc thi lập trình quốc tế dành cho sinh viên đại học trên khắp thế giới. ICPC được tổ chức hàng năm và thu hút sự tham gia của các đội đến từ các trường đại học và viện nghiên cứu trên toàn cầu.</li>
+        <li style="font-size: 28px;"> Các đội tham gia phải giải quyết một loạt các bài toán lập trình trong khoảng thời gian giới hạn, sử dụng các ngôn ngữ lập trình như C++, Java, hoặc Python. </li>
+        <li style="font-size: 28px;">    Cuộc thi này đã trở thành một sự kiện danh giá nhất trong cộng đồng lập trình và có uy tín cao trong Cộng Đồng Giáo Dục . </li>
+        </ul>
+      </div>
+      <div class="col-md-3 icpc-image" style="float: right; padding-left: 100px;">
+        <img src="{% static 'blog/icpc.png' %}" alt="Olympic Image" style="width: auto; height: 50vh">
+      </div>
+    </div>
+  </div>
+
+<!-- Phần lịch sử cuộc thi ACM/ICPC -->
+  <div class="concept mt-5 custom-container2">
+    <div class="con2">
+      <h1> LỊCH SỬ CUỘC THI ICPC ? </h1>
+    </div>
+        <ul class="timeline">
+      <!-- Timeline Item 1 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">1970</span>
+          <h3 class="timeline-title">Sự Khởi Đầu</h3>
+          <p class="timeline-description">Cuộc thi đầu tiên được tổ chức bởi những người tiên phong thuộc Alpha Chapter của Hiệp hội Danh dự Khoa học Máy tính UPE. Sáng kiến này lan truyền nhanh chóng ở Hoa Kỳ và Canada như một chương trình đổi mới nhằm nâng cao tham vọng, năng khiếu giải quyết vấn đề và cơ hội của những sinh viên giỏi nhất trong lĩnh vực máy tính.</p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 2 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">1980s -1990s </span>
+          <h3 class="timeline-title">Mở Rộng và Tăng Trưởng</h3>
+          <p class="timeline-description">Trong những năm 1980 và 1990, ICPC mở rộng nhanh chóng, thu hút các trường đại học từ khắp nơi trên thế giới tham gia các cuộc thi khu vực. Cuộc thi được công nhận là nền tảng để thể hiện kỹ năng giải quyết vấn đề và lập trình của học sinh.</p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 3 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">1997</span>
+          <h3 class="timeline-title">Thành Lập Quỹ ICPC </h3>
+          <p class="timeline-description">Để hỗ trợ sự phát triển và quốc tế hóa cuộc thi, Quỹ ICPC được thành lập vào năm 1997. Quỹ này đóng vai trò quan trọng trong việc điều phối các cuộc thi khu vực và Vòng chung kết Thế giới.</p>
+        </div>
+      </li>
+      
+      <!-- Timeline Item 4 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">2000s</span>
+          <h3 class="timeline-title">Quốc Tế Hóa </h3>
+          <p class="timeline-description">ICPC tiếp tục phát triển trên toàn cầu, với ngày càng nhiều quốc gia tham gia cạnh tranh. Các cuộc thi khu vực được tổ chức ở nhiều nơi trên thế giới dẫn đến sự đa dạng và tính cạnh tranh ngày càng tăng.</p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 5 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">Đầu Thế kỉ 21</span>
+          <h3 class="timeline-title">Vòng Chung Kết Thế giới (World Final) </h3>
+          <p class="timeline-description">Vòng Chung Kết Thế Giới trở thành một sự kiện quan trọng, quy tụ những đội hàng đầu từ các cuộc thi khu vực trên toàn thế giới. Quốc gia đăng cai Vòng chung kết Thế giới thay đổi hàng năm, cho phép người tham gia trải nghiệm các nền văn hóa và môi trường khác nhau.</p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 6 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">2010s</span>
+          <h3 class="timeline-title">Công Nghệ Và Tài Trợ cho Cuộc Thi ICPC </h3>
+          <p class="timeline-description">Với những tiến bộ về công nghệ, ICPC đã kết hợp các công cụ và nền tảng mới để tổ chức các cuộc thi. Nguồn tài trợ từ các công ty công nghệ cũng tăng lên, cung cấp nguồn lực và hỗ trợ cho cuộc thi.</p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 7 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">Hiện Tại</span>
+          <h3 class="timeline-title">Sự Phát triển Vững Mạnh của Cộng đồng ICPC  </h3>
+          <p class="timeline-description">ICPC đã phát triển một cộng đồng sinh viên, huấn luyện viên và nhà tổ chức vững mạnh. Sự hợp tác với các đối tác trong ngành, tổ chức giáo dục và chính phủ đã góp phần vào sự bền vững và phát triển của cuộc thi.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- Kết thúc phần lịch sử cuộc thi ICPC  -->
+
+<!-- phần level cuộc thi ICPC -->
+<div class="con2">
+  <h1>CÁC CẤP ĐỘ CUỘC THI ICPC </h1>
+</div>
+
+<div class="container1">
+  <div class="row section3">
+    <div class="col-md-8">
+      <div class="text-container" style="font-size: 22px;">
+        <h4> <span style="color: darkcyan; font-weight: bold;"> 1. Cuộc thi địa phương (Local Contest) </span> </h4>
+         <p> Cuộc thi địa phương (Local Contests): Cuộc thi này được tổ chức bởi các trường đại học hoặc tổ chức riêng lẻ. Học sinh tham gia vào các cuộc thi này để đủ điều kiện lên cấp độ tiếp theo. Người chiến thắng thường tiến tới các cuộc thi khu vực.</p>
+       
+     
+       <h4> <span style="color: blue; font-weight: bold;"> 2. Cuộc thi khu vực (Regional Contest)</span> </h4>
+         <p> Cuộc thi khu vực (Regional Contest) : Cuộc thi này quy tụ các đội từ nhiều trường đại học trong một khu vực địa lý cụ thể. Các đội chiến thắng từ các cuộc thi khu vực sẽ tiến lên cấp độ tiếp theo. </p>
+         <p> Ở Việt Nam có 3 cuộc thi khu vực tương ứng với 3 miền: Bắc – Trung – Nam. Dựa trên vị trí của trường đại học của đội tham gia thì đội  sẽ tham gia cuộc thi chính thức với miền đó.</p>
+   
+      
+   
+       <h4> <span style="color: purple; font-weight: bold;">3. Giải vô địch khu vực (Super Regional)</span>  </h4>
+         <p> Cuộc thi siêu khu vực (Super Regional Contest) : Ở một số khu vực, cuộc thi này là tập hợp những người chiến thắng hoặc các đội có thành tích cao nhất từ cuộc thi khu vực sẽ cùng nhau giải quyết 13 bài thuật toán trong thời gian 5 tiếng.</p>
+         <p> Các đội có thành tích xuất sắc sẽ tiến tới cuộc thi khu vực ICPC (ICPC Regional Contest) </p>
+       
+   
+       <h4>  <span style="color: darkorange; font-weight: bold;"> 4. Cuộc thi khu vực ICPC (ICPC Regional Contest)</span> </h4>
+         <p> Cuộc thi này đôi khi được gọi là cuộc thi "sub-regional" sẽ cùng nhau giải quyết các bài thuật toán mang tính thực tế cao. </p>
+         <p> Những đội chiến thắng trong các cuộc thi này sẽ đủ điều kiện tham dự Vòng chung kết Thế giới ICPC.</p>
+       
+   
+        <h4> <span style="color: red; font-weight: bold"> 5. Vòng Chung kết Thế giới ICPC (ICPC World Final) </span> </h4>
+         <p> Các đội đứng đầu từ mỗi cuộc thi khu vực từ sáu châu lục khác nhau cùng nhau cạnh tranh trong Vòng Chung kết thế giới. Tại đây các đội sẽ thể hiện kĩ năng giải quyết, chinh phục bộ bài toán khó nhất thế giới. </p>
+           <p> Chỉ có 1 đội giải được nhiều bài nhất với thời gian tích lũy ít nhất giành được vinh dự cao nhất là <b> Nhà vô địch Thế giới ICPC. </b> </p>       
+       </div>
+    </div>
+
+      <div class="col-md-4">
+              <div class="image-container">
+                  <img src="{% static 'blog/icpc_cup.png' %}" alt="Image" class="container-fluid">
+              </div>
+      </div>
+  </div>
+</div>
+<!-- end phần cấp độ cuộc thi ICPC  -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'blog/main4.js' %}"></script>
+  </body>
+</html>
+{%endblock%}

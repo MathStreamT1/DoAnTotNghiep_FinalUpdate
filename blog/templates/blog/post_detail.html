@@ -1,0 +1,141 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ post.title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Styles -->
+    <style>
+        .post-container {
+            /* Your existing styles... */
+            opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            transform: translateY(20px); /* Set initial position for slide-in effect */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            margin-bottom: 10px;
+        }
+
+        .post-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .comment-section {
+            opacity: 0; /* Set initial opacity to 0 for fade-in effect */
+            transform: translateY(20px); /* Set initial position for slide-in effect */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .comment-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .add-comment-section {
+            transition: transform 0.3s ease-out;
+        }
+
+        .add-comment-section:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Blog Post Content -->
+    <div class="container post-container">
+        <h1 class="mb-4 mt-5">
+            <i class="fas fa-bell title-icon"></i>
+            <span style="color: red;">{{ post.title }}</span>
+        </h1>
+        <p class="text-muted"> Ngày Đăng: {{ post.date_posted }}</p>
+        <h5 class="card-title author-info">
+            <i class="far fa-user"></i> Tác Giả: 
+            <span class="author-name">{{ post.author }}</span>
+        </h5>
+        <hr class="border-top border-2 border-dark">
+
+        <!-- Author Information -->
+        <p class="post-content">{{ post.content | safe | linebreaks }}</p>
+
+        <!-- Edit and Delete Buttons with Icons -->
+        <div class="edit-delete-buttons">
+            {% if user.is_authenticated and user == post.author %}
+                <a href="{% url 'post_edit' post.id %}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Chỉnh Sửa
+                </a>
+                <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Xóa
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="container mt-4">
+        <h2 class="h3">
+            <i class="far fa-comments comment-icon"></i> <span class="text-orange">Bình Luận Bài Viết</span>
+        </h2>
+    
+        {% for comment in post.comments.all %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text font-weight-normal mb-0">{{ comment.body }}</p>
+                    <small class="text-muted">{{ comment.date_posted }}</small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <span class="text-primary">{{ comment.author.username }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    
+        <div class="add-comment-section mt-4">
+            <h3 class="h4">
+                <i class="far fa-comment-dots comment-icon"></i> Thêm Bình Luận
+            </h3>
+            <form method="post" action="{% url 'post_detail' post.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="commentBody" class="form-label">Nội Dung</label>
+                    <textarea id="commentBody" name="body" class="form-control" placeholder="Nhận xét của bạn..." rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Gửi Bình Luận</button>
+            </form>
+        </div>
+    </div>
+    
+    {% endif %}
+
+    <!-- Bootstrap JS and Popper.js (Required for Bootstrap features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript to add the 'show' class to trigger animations
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector('.post-container').classList.add('show');
+            document.querySelector('.comment-section').classList.add('show');
+        });
+    </script>
+
+<script>
+    // Sử dụng sessionStorage để theo dõi trạng thái đã thêm bình luận
+    var commentAdded = sessionStorage.getItem('commentAdded');
+</script>
+
+<script>
+    $(function() {
+        $('#myEditor').froalaEditor();
+    });
+</script>
+</body>
+
+</html>
+{% endblock content %}

@@ -1,0 +1,104 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <title>Danh Sách Sinh Viên Đạt Giải Olympic Tin Học Sinh Viên</title>
+      </head>
+    <style>
+        .center-year {
+            text-align: center;
+            vertical-align: middle;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-3" style="color: #007BFF;"><i class="fa-solid fa-award fa-fade fa-lg"></i> Danh Sách Sinh Viên Đoạt Giải Olympic Tin Học Sinh Viên</h2>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'olp_create' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-edit"></i> Tạo
+        </a>
+        {% endif %}
+        <form id="yearForm mt-3">
+            <label for="selectYear">Chọn Năm:</label>
+            <select id="selectYear" name="year">
+                <option value="all">Tất Cả</option>
+                {% for year, icpcs_list in grouped_achievements.items %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" onclick="showOLP()">
+                <i class="fas fa-eye"></i> Hiển thị
+            </button>
+            
+        </form>
+        
+        <table class="table table-bordered mt-3" style="border: 2px solid black;">
+            <thead style="border: 2px solid black;">
+                <tr>
+                    <th scope="col" style="border-right: 2px solid black; background-color: white; text-align: center;"><i class="fas fa-calendar-alt"></i> Năm</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: pink; text-align: center;"><i class="fas fa-user"></i> Họ và Tên</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: yellow; text-align: center;"><i class="fas fa-university"></i> Khoa</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: cyan; text-align: center;"><i class="fas fa-trophy"></i> Giải</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: aquamarine; text-align: center;"><i class="fas fa-medal"></i> Hệ</th>
+                     
+                    <!-- <th scope="col" style="border-right: 2px solid black; background-color: yellow;"><i class="fas fa-certificate"></i> Bằng cấp</th> -->
+                </tr>
+            </thead>
+            <tbody style="border: 4px solid black;" id="olpTableBody">
+                {% for year, olps_list in grouped_achievements.items %}
+                    {% for olp in olps_list %}
+                        <tr class="olp-row" data-year="{{ year }}">
+                            {% if forloop.first %}
+                                <!-- Display the year only for the first row of each group -->
+                                <td rowspan="{{ olps_list|length }}" style="border: 2px solid black;" class="center-year text-align-center justify-content-center" style="font-size: 28px;">{{ year }}</td>
+                            {% endif %}
+                            <td style="border: 2px solid black;"> {{ olp.description | safe |linebreaks }}</td>
+                            <td style="border: 2px solid black;"> {{olp.system}}</td>
+                            <td style="border: 2px solid black;">{{ olp.rank }}</td>
+                            <td style="border: 2px solid black;">{{ olp.system }}</td>
+                            {% if request.user.is_superuser %}
+                            <td style="border: 2px solid black;">
+                            
+                               
+                                <a href="{% url 'olp_update' olp.id %}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Chỉnh Sửa
+                                </a>
+                                <a href="{% url 'olp_delete' olp.id %}" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Xóa
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showOLP() {
+            var selectedYear = document.getElementById('selectYear').value;
+            var olpRows = document.getElementsByClassName('olp-row');
+            
+            for (var i = 0; i < olpRows.length; i++) {
+                var row = olpRows[i];
+                var rowYear = row.getAttribute('data-year');
+                
+                if (selectedYear === 'all' || rowYear === selectedYear) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+{% endblock %}

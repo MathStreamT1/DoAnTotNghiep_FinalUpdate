@@ -1,0 +1,94 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Olympic Tin Học Sinh Viên </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel = "stylesheet" href = "{% static 'blog/main5.css'%}">
+</head>
+<body>
+  <div class="container custom-container1 mb-2">
+    <div class="con1">
+      <h1> OLYMPIC TIN HỌC SINH VIÊN VIỆT NAM (OLP) </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-7  olp-text">
+        <p style="font-size: 28px;"> Olympic Tin học Sinh Viên Việt Nam (Vietnam Collegiate Programming Contest - VNOI) là một cuộc thi lập trình dành cho sinh viên Đại học tại Việt Nam và là sáng kiến của Hội Tin học Việt Nam, Hội Sinh viên Việt Nam và Bộ giáo dục và Đào tạo. Cuộc thi này thường được tổ chức hàng năm với mục tiêu tìm kiếm và tôn vinh những tài năng xuất sắc trong lĩnh vực lập trình.</p>
+        <p style="font-size: 28px;"> Olympic Tin học Sinh viên Việt Nam là hoạt động phong trào đã có tác dụng rất to lớn và thiết thực đối với sinh viên cũng như sự nghiệp phát triển nguồn nhân lực CNTT-TT của nước nhà &nbsp;</p>
+
+      </div>
+      <div class="col-md-5 olp-image ms-auto">
+        <img src="{% static 'blog/logo_olp.png' %}" alt="Olympic Image" class="img-fluid" style="width: 400px;">
+      </div>
+    </div>
+  </div>
+
+<!-- Phần khối thi của Olympic Tin học Sinh Viên  -->
+  <div class="container1 mt-5 custom-container2">
+    <div class="con2">
+      <h2>CÁC KHỐI THI CỦA OLYMPIC TIN HỌC SINH VIÊN  </h2>
+    </div>
+    <ul class="timeline">
+      <!-- Timeline Item 1 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">01</span>
+          <h3 class="timeline-title">Khối Thi Cá Nhân Siêu Cúp OLP</h3>
+          <p class="timeline-description">Được tổ chức thi độc lập, không phân biệt chuyên hay không chuyên Tin học, không phân biệt các sinh viên đã đoạt giải Tin học chính thức trong nước và quốc tế. Mỗi trường có thể thành lập đội tuyển thi Siêu Cúp </p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 2 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">02 </span>
+          <h3 class="timeline-title">Khối Thi Cá nhân Chuyên Tin Học </h3>
+          <p class="timeline-description">Dành cho sinh viên đào tạo theo mã ngành <b> Công nghệ Thông Tin - Tin học </b></p>
+        </div>
+      </li>
+
+      <!-- Timeline Item 3 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">03</span>
+          <h3 class="timeline-title">Khối Thi Cá Nhân Không Chuyên Tin Học  </h3>
+          <p class="timeline-description">Dành cho sinh viên các ngành đào tạo khác mã ngành Công nghệ thông tin - Tin học (khối B) và sinh viên Cao đẳng. </p>
+          <p class="timeline-description"> <b> Các sinh viên thuộc diện đối tượng Chuyên tin không được đăng ký thi khối Không chuyên Tin học. </b></p>
+        </div>
+      </li>
+      
+      <!-- Timeline Item 4 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">04</span>
+          <h3 class="timeline-title">Khối thi Tập thể Phần mềm Mã Nguồn mở  </h3>
+          <p class="timeline-description">Mỗi trường có thể thành lập không quá <b> 02 đội tuyển </b>  và tối đa 03 sinh viên / đội tuyển. </p>
+          <p class="timeline-description">Hình thức thi khối này là hình thức <b> Hackathon </b> giải một số bài toán Tin học trên máy tính bằng Phần mềm nguồn mở và trả lời các câu hỏi liên quan đến Phần mềm mã nguồn mở (thi vào buổi riêng)</p>
+
+        </div>
+      </li>
+
+      <!-- Timeline Item 5 -->
+      <li class="timeline-item">
+        <div>
+          <span class="timeline-date">05</span>
+          <h3 class="timeline-title"> Khối thi Lập trình đối kháng PROCON Vietnam (theo mô hình Procon Japan) </h3>
+          <p class="timeline-description">Mỗi trường có thể thành lập không quá <b> 02 đội tuyển </b> và tối đa 03 sinh viên / đội tuyển. </p>
+          <p class="timeline-description"> Nội dung thi khối này là thi nội dung lập trình <b> đối kháng PROCON </b>trên máy tính theo đề thi và môi trường thi cho trước.  </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- Kết thúc phần lịch sử cuộc thi ICPC  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'blog/main4.js' %}"></script>
+  </body>
+</html>
+{%endblock%}

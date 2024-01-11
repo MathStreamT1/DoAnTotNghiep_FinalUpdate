@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Delete OLP</h2>
+    <p>Bạn có chắc chắn muốn xóa thông tin OLP với các thông tin bên dưới này không</p>
+    <ul>
+        <li>Hạng: {{ olp.rank }}</li>
+        <li>Tên: {{ olp.description }}</li>
+        <li>Năm: {{ olp.year }}</li>
+        <li>Hệ: {{olp.system}}</li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i> Xác Nhận Xóa
+        </button>
+        <a href="{% url 'olp_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Hủy Bỏ
+        </a>
+    </form>
+  </div>
+{% endblock content %}

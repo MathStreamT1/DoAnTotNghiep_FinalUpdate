@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "{% static 'blog/main1.css'%}">
+  <!-- Favicon : Favourite Icon -->
+  <link rel="icon" href="{% static 'blog/favicon.png' %}" type="image/x-icon">
+    
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="{% static 'blog/logo_dhsp.png' %}" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item d-flex justify-content-center">
+            <a class="nav-link" href="{% url 'blog-home' %}" style="font-size: 22px;">
+              <i class="fas fa-home"></i> Trang Chủ
+            </a>
+          </li>
+          <li class="nav-item dropdown d-flex justify-content-center">
+            <a class="nav-link dropdown-toggle" href="#" id="achievementsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="font-size: 22px;">
+                <i class="fas fa-trophy"></i> Bảng Vàng
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="achievementsDropdown" style="font-size: 22px;">
+                <a class="dropdown-item" href="{% url 'olp_list' %}">Olympic Tin Học Sinh Viên</a>
+                <a class="dropdown-item" href="{% url 'icpc_list' %}">Kì Thi Lập Trình ACM/ICPC</a>
+                <a class="dropdown-item" href="{% url 'procon_list' %}">Kì Thi PROCON</a>
+            </div>
+        </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item d-flex justify-content-center">
+            <a class="nav-link" href="{% url 'document_list' %}" style="font-size: 22px;">
+              <i class="fas fa-code"></i> Tài Liệu 
+            </a>
+          </li>
+          {%endif %}
+          <li class="nav-item dropdown d-flex justify-content-center">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" style="font-size: 22px;">
+              <i class="fas fa-circle-info"></i> Olympic Tin Học Sinh Viên
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 22px;">
+              <a class="dropdown-item" href="{% url 'blog-olp' %}" style="font-size: 22px;">Olympic Tin Học Sinh Viên</a>
+              <a class="dropdown-item" href="{% url 'blog-icpc' %}" style="font-size: 22px;">Lập trình Đồng Đội ICPC</a>
+          </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item d-flex justify-content-center">
+            <a class="nav-link" href="{% url 'post_new' %}" style="font-size: 22px;">
+              <i class="fa-solid fa-pencil fa-lg"></i> Tạo Bài Viết
+            </a>
+          </li>
+
+          {% endif %}
+
+          <li class="nav-item d-flex justify-content-center">
+            <a class="nav-link"  href="{% url 'blog-about' %}" style="font-size: 22px;">   <span style="font-family: 'FontAwesome';">&#64;</span> Về Chúng Tôi</a>
+          </li>
+        </ul>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'view_profile' username=user.username %}" class="btn btn-primary w-100 me-2 mb-2 mb-lg-0" style="font-size: 20px;">
+                <i class="fas fa-user"></i> {{ user.username }}
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="{% url 'logout' %}" class="btn btn-success w-100 me-2 mb-2 mb-lg-0" style="margin-left: 5px; font-size: 20px;">
+              <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+      {% else %}
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'blog-login' %}" class="btn btn-primary w-100 me-2 mb-2 mb-lg-0" style="font-size: 22px;">
+              <i class="fas fa-sign-in-alt"></i> Đăng Nhập
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="{% url 'blog-register' %}" class="btn btn-success w-100" style="margin-left: 5px; font-size: 22px;">
+              <i class="fas fa-user-plus"></i> Đăng Kí 
+            </a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
+
+<div class="container1">
+    {% block content %}{% endblock %}
+</div>
+    <!-- Footer -->
+    <footer class="footer bgfooter">
+        <div class="row" style="color:white; padding:20px; letter-spacing:0.3px">
+            <div class="col-md-5" style="font-size: 22px;">
+                <div> <center> © Copyright 2023 Trường Đại Học Sư Phạm TPHCM. All rights reserved </center> </div>
+                <center> <img src="{% static 'blog/cntt.png' %}" alt="" style="width: 120px; height: 120px;">
+                <img src="{% static 'blog/Logo HCMUE.png' %}" alt="" style="width: 240px; height: 120px;"> </center>
+            </div>
+            <div class="col-md-2">
+                <div style="font-weight:bold;"><center> LIÊN KẾT </center> </div>
+                <hr style="border: 4px solid #eee;">
+                <div>
+                    <div><a href="http://upcoder.xyz/'index.php/" style="color:yellow; text-decoration:none; cursor:pointer"><center> UPCoder </center></a></div>
+                    <div><a href="https://www.facebook.com/upcoder" style="color:yellow; text-decoration:none; cursor:pointer"> <center> Facebook </center> </a></div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div style="font-weight:bold;">TRƯỜNG ĐẠI HỌC SƯ PHẠM THÀNH PHỐ HỒ CHÍ MINH (HCMUE)</div>
+                <hr style="border: 4px solid #eee;">
+                <div>
+                    <div>
+                        <i class="fa-solid fa-location-dot fa-bounce" style="color: #ff0000;"></i> <b>280 An Dương Vương, Phường 4, Quận 5, Thành Phố Hồ Chí Minh</b>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-location-dot fa-bounce" style="color: #ff0000;"></i> <b>222 Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh </b>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-phone fa-bounce"></i> <b>(+84 28) 38 632 052 - 38 629 232</b> - Fax: <b>(+84 28) 38 650 991 </b>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</html>

@@ -1,0 +1,142 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "{% static 'blog/main2.css'%}">
+    <title> Trang Chủ </title>
+
+    <style>
+    a {
+     text-decoration: none;
+    }
+
+    /* Style the link color */
+    a:hover {
+      color: #ff0000; 
+    }
+        
+    </style>
+</head>
+<body>
+    <!-- tạo một cái class intro để đóng text dòng Chào mừng -->
+    <div class="jumbotron scrollreveal animate__animated animate__fadeIn">
+        <div class="container">
+            <h1 class="display-12" style="font-size: 46px; display: flex; justify-content: center; align-items: center;"> CỔNG THÔNG TIN OLYMPIC TIN HỌC   </h1>
+        </div>
+    </div>
+
+    <div class="intro"> 
+        <div class="text-typing">
+            <p class="lead" style="font-size: 30px;">🚀Chào mừng bạn đến với Cổng Thông Tin Olympic Tin Học của khoa Công Nghệ Thông Tin Trường Đại Học Sư Phạm Thành Phố Hồ Chí Minh !</p>
+        </div>
+    </div>
+    <!-- Tập trung các bài Post do Admin đã đăng  -->
+    <div class="container custom-container" style="max-width: 1500px;">
+
+        <!-- Main Content and Sidebar Section -->
+        <div class="row">
+            <!-- Ở Đây sẽ có những bài Post được đánh dấu là Published  -->
+            <div class="col-lg-9">
+                {% for post in posts %}
+                   {% if post.status == 'published' and post.category.name != 'Tài Liệu' %}
+                    <div class="card post-card" style="border: 4px solid gold;">
+                        <div class="card-body">
+                            <h1 class="card-title">
+                                <i class="fa-sharp fa-regular fa-bell fa-shake"></i> <span style="color: red;"> {{ post.title }} </span>
+                            </h1>
+                            <p class="card-text post-meta" style="font-size: 22px; color: black;">
+                                <i class="far fa-calendar-alt"></i> Ngày đăng: <span style="color: blue;">  {{ post.date_posted|date:"F d, Y H:i:s" }} 
+                                (UTC+7:00) </span> || <i class="fas fa-user"></i>  <span style="font-weight: bold;">Tác giả:</span> <a href="{% url 'view_profile' post.author.username %}"> <span style="color: black;font-weight: bold;">  {{ post.author.username|slice:"1" }}</span><span style="color: red; font-weight: bold;">{{ post.author.username|slice:"1:" }}</span> </a>
+                                  </a>
+                            </p>
+                            <hr>
+                            <div class="card-text post-content">
+                                <!-- chỉ giữ lại 30 từ của nội dung bài viết để hiển thị trong danh sách. -->
+                                <i class="fas fa-quote-left"></i>  {{post.content | safe | linebreaks | truncatewords:30 }}  <i class="fas fa-quote-right"></i>
+                            </div>
+                            <a href="{% url 'post_detail' pk=post.pk %}" class="btn neon-button">Đọc Bản Đầy Đủ</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+<!-- Kết thúc phần nội dung chính  -->
+            <!-- Sidebar Section (Phần Nội dung Sidebar lấy 3 thông tin mới nhất cho người đọc ) -->
+            <div class="col-lg-3">
+                <div class="card sidebar-card">
+                    <div class="card-body">
+                        <h3> <span style="font-weight: 700;"> Bảng Tin Mới Nhất </span> </h3>
+                        {% for sidebar_post in sidebar_posts %}
+                            {% if sidebar_post.status == 'published' and sidebar_post.category.name != "Tài Liệu" %}
+                                <a href="{% url 'post_detail' pk=sidebar_post.pk %}" style="text-decoration: none; font-size: 28px;">
+                                    <p style="color: red;">{{ sidebar_post.title }}</p>
+                                </a>
+                                <p style="color: blue;"> <i class="far fa-calendar-alt"></i> {{ sidebar_post.date_posted|date:"F d, Y H:i:s" }}</p>
+                                <p> <i class="fas fa-user"></i> Tác Giả:<span style="color: black;font-weight: bold;">  {{ sidebar_post.author.username|slice:"1" }}</span><span style="color: red; font-weight: bold;">{{ sidebar_post.author.username|slice:"1:" }}</span></p>
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+    <!-- Kết thúc phần nội dung bài Post -->
+    <!-- Thêm Phần phân trang  -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+    
+            {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+    
+            {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                    <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                {% elif i > posts.number|add:'-2' and i < posts.number|add:'2' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+    
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</body>
+</html>
+{% endblock %}

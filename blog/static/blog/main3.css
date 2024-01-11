@@ -1,0 +1,19 @@
+
+h2 {
+    font-weight: 700;
+    font-size: 75px;
+    border-radius: 0.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    color: #00416c;
+}
+
+p
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.section-content {
+    padding: 2.5rem 0;
+}

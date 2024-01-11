@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block title %}Post Detail Page{% endblock %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5 pt-3">
+        <div class="col-md-9 offset-md-2">
+            <div class="card my-3 shadow">
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        Bạn có muốn xóa bài post "{{ post.title }}" không ?
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <a class="btn btn-secondary btn-block btn-sm" href="{% url 'post_detail' post.id %}">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                        
+                        <button class="btn btn-primary btn-block btn-sm" type="submit">
+                            <i class="fas fa-check"></i> Xác Nhận 
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

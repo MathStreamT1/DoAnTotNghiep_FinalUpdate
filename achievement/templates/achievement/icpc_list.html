@@ -1,0 +1,109 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <title>Danh Sách đạt giải Kỳ Thi Lập Trình Viên Quốc Tế ACM/ICPC</title>
+      </head>
+    <style>
+        .center-year {
+            text-align: center;
+            vertical-align: middle;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-3" style="color: darkgoldenrod;"><i class="fa-solid fa-award fa-fade fa-lg"></i> Danh Sách Sinh Viên / Team Đạt Giải Kì Thi ACM/ICPC</h2>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'icpc_create' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-edit"></i> Tạo
+        </a>
+        {% endif %}
+        <form id="yearForm">
+            <label for="selectYear">Chọn Năm:</label>
+            <select id="selectYear" name="year">
+                <option value="all">Tất Cả</option>
+                {% for year, icpcs_list in grouped_achievements.items %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" onclick="showICPC()">
+                <i class="fas fa-eye"></i> Hiển thị
+            </button>
+            
+        </form>
+        
+        <table class="table table-bordered mt-3" style="border: 2px solid black;">
+            <thead style="border: 2px solid black;">
+                <tr>
+                    <th scope="col" style="border-right: 2px solid black; background-color: white; text-align: center;"><i class="fas fa-calendar-alt"></i> Năm</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: pink; text-align: center;"><i class="fas fa-users"></i> Tên Team / Họ và tên trong team</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: pink; text-align: center;"><i class="fas fa-graduation-cap"></i> Khoa</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: cyan; text-align: center;"><i class="fas fa-trophy"></i> Giải</th>
+                    <th scope="col" style="border-right: 2px solid black; background-color: cyan; text-align: center;"><i class="fas fa-binoculars"></i> Phạm Vi</th>
+                    {% if request.user.is_superuser %}
+                    <th scope="col" style="border-right: 2px solid black; background-color: cyan; text-align: center;"><i class="fas fa-trophy"></i> Thao Tác</th>
+                    {% endif %}
+                    <!-- <th scope="col" style="border-right: 2px solid black; background-color: yellow;"><i class="fas fa-certificate"></i> Bằng cấp</th> -->
+                </tr>
+            </thead>
+            <tbody style="border: 4px solid black;" id="icpcTableBody">
+                {% for year, icpcs_list in grouped_achievements.items %}
+                    {% for icpc in icpcs_list %}
+                        <tr class="icpc-row" data-year="{{ year }}">
+                            {% if forloop.first %}
+                                <!-- Display the year only for the first row of each group -->
+                                <td rowspan="{{ icpcs_list|length }}" style="border: 2px solid black;" class="center-year text-align-center justify-content-center" style="font-size: 28px;">{{ icpc.year }}</td>
+                            {% endif %}
+                            
+                            <td style="border: 2px solid black;"> {{ icpc.team_name | safe | linebreaks }}</td>
+                            <td style="border: 2px solid black;">{{ icpc.khoa}}</td>
+                            <td style="border: 2px solid black;">{{ icpc.result}}</td>
+                            <td style="border: 2px solid black;">{{ icpc.scope }}</td>
+
+                            {% if request.user.is_superuser %}
+                            <td style="border: 2px solid black;">
+                            
+                                <!-- Add update and delete buttons with appropriate URLs -->
+                                <a href="{% url 'icpc_update' icpc.id %}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Chỉnh Sửa
+                                </a>
+                                
+                                <a href="{% url 'icpc_delete' icpc.id %}" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Xóa
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showICPC() {
+            var selectedYear = document.getElementById('selectYear').value;
+            var icpcRows = document.getElementsByClassName('icpc-row');
+            
+            for (var i = 0; i < olpRows.length; i++) {
+                var row = icpcRows[i];
+                var rowYear = row.getAttribute('data-year');
+                
+                if (selectedYear === 'all' || rowYear === selectedYear) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+{% endblock %}

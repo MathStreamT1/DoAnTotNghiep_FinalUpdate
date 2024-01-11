@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 style="color: #dc3545;"><i class="fas fa-plus"></i> Tạo Thông Tin Cho Người Đạt Giải PROCON </h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="{{ form.year.id_for_label }}" style="font-weight: bold;"><i class="fas fa-calendar-alt"></i> Năm:</label>
+        {{ form.year }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.team_name.id_for_label }}" style="font-weight: bold;"><i class="fas fa-users"></i> Tên Team:</label>
+        {{ form.team_name }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.result.id_for_label }}" style="font-weight: bold;"><i class="fas fa-trophy"></i> Đạt Giải:</label>
+        {{ form.result }}
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.certificate.id_for_label }}" style="font-weight: bold;"><i class="fas fa-certificate"></i> Bằng cấp:</label>
+        {{ form.certificate }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-save"></i> Save
+      </button>
+      
+    </form>
+
+    <a href="{% url 'procon_list' %}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Quay trở lại trang danh sách PROCON</a>
+  </div>
+</body>
+{% endblock %}

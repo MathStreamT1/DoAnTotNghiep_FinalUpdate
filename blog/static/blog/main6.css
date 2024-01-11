@@ -1,0 +1,31 @@
+body {
+    background-image: url('programming.jpg'); /* Add the path to your cover image */
+    background-size: cover;
+    background-position: center;
+    animation: fadeInUp 2s;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent white background for better readability */
+    padding: 20px;
+    border-radius: 40px;
+    margin-top: 150px; /* Adjust the top margin as needed */
+    margin-bottom: 150px; /* Adjust the bottom margin as needed */
+    text-align: center;
+    justify-content: center;
+}
+
+img {
+    max-width: 100%; /* Make sure the image doesn't exceed its container */
+    margin-bottom: 10px; 
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

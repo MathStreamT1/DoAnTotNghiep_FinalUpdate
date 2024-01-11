@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Delete OLP</h2>
+    <p>Bạn có chắc chắn muốn xóa thông tin PROCON với các thông tin bên dưới này không</p>
+    <ul>
+        <li>Tên Team: {{ procon.team_name }}</li>
+        <li>Năm: {{ procon.year }}</li>
+        <li>Giải: {{procon.result}}</li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i> Xác Nhận Xóa
+        </button>
+        <a href="{% url 'procon_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Hủy Bỏ
+        </a>
+    </form>
+  </div>
+{% endblock content %}

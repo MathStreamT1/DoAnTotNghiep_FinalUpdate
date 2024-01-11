@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'blog/main3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <title>Về Chúng Tôi </title>
+
+    <style>
+        /* Remove underline from the link */
+        a {
+          text-decoration: none;
+        }
+    
+        /* Style the link color */
+        a:hover {
+          color: #ff0000; /* Change the color on hover if desired */
+        }
+      </style>
+</head>
+<body>
+    <section id="main-section" class="main-section spaced-section" style=" background-color: wheat;">
+        <section class="section-content py-md-11 animate__animated animate__fadeIn">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 mb-md-7 mb-4">
+                        <h2 class="page-title mb-0">Về Chúng Tôi </h2>
+                        <hr style="border: 4px solid red;">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10" style="text-decoration: none;">
+                        <div class="about">
+                            <p style="font-size: 22px;" > <a href = "http://127.0.0.1:8000" style="color: darkblue; font-weight: bold;"> Cổng Thông tin Olympic Tin học HCMUE </a> là cổng trang cung cấp thông tin chính xác, tích cực cho mọi người có <b>mong muốn học lập trình</b> và <b> đam mê lập trình</b> </p>
+                            <p style="font-size: 22px;"><span>Bên cạnh trang <a href = "http://upcoder.xyz/'index.php" style="color: red; font-weight: bold; ">  UPCoder </a> là trang nền tảng lập trình  <span style="font-weight: 400;" ><b> chú trọng thực hành </b> </span> với kho bài tập <span style="font-weight: 400;"> <b> phong phú </b> </span> và tạo ra sân chơi rộng mở cho học sinh /sinh viên yêu thích bộ môn Tin học.&nbsp;Đối với chúng tôi, trang này là trang Kết nối, chia sẻ và học hỏi các kiến thức lập trình để tạo ra những mối quan hệ và sự kết nối quan trọng trong sự nghiệp và cuộc sống. &nbsp;</span></p>
+                            <p style="font-size: 22px;"><span>Không những thế, trang này cập nhật những thông tin mới nhất về các kì thi lập trình lớn như <span style="font-weight: bold;">ACM ICPC, Olympic Tin học, ... </span> để những ai yêu thích lập trình có thể tham gia lớp học OLP để được nâng cao kĩ năng lập trình và được thi đấu ở các kì thi như trên. Do đó đừng bỏ lỡ bất kỳ cập nhật nào với thông tin mới nhất. Chúng tôi cam kết mang đến cho bạn trải nghiệm tốt nhất với những thông tin mới nhất về trang Olympic Tin học. </p> </span>
+                            <p style="font-size: 22px; text-align: right; font-weight: 600;"><span> -- <i> Trần Võ Khôi Nguyên </i> -- </span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <img class="img-fluid" src="{% static 'blog/room.jpg' %}" style="width: 100vw; height: 65vh; background-color: rgba(0, 0, 0, .1);" alt="Image" >
+    </section>
+    <!-- Bootstrap JS and Popper.js from CDN -->
+    <script>
+        document.getElementById('myLink').addEventListener('click', function(event) {
+          event.preventDefault(); // Ngăn chặn hành động mặc định khi click vào liên kết
+          window.location.href = this.getAttribute('href').replace(/_/g, ''); // Bỏ dấu gạch chân
+        });
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

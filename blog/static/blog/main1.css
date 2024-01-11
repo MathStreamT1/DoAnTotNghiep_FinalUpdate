@@ -1,0 +1,28 @@
+
+.bgfooter {
+  background-color: #1e305a;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+
+  margin-top: 50px;
+}
+
+.banner-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s, transform 1s;
+}
+
+.btn-hover:hover {
+  background-color: #eeeeee; /* Change the background color on hover */
+  color: #333333; /* Change the text color on hover */
+  /* Add any other styles you want for the hover effect */
+}
+
